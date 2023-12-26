@@ -10,13 +10,12 @@ public class PushButtonAgent : Agent
     [SerializeField] private Transform env;
     [SerializeField] private Transform target;
     [SerializeField] private Transform button;
+    [SerializeField] private Transform enemy;
     [SerializeField] private SpriteRenderer backgroundSpriteRenderer;
 
     private bool isButtonPushed;
     private bool interact;
     private int actionsReceived;
-
-
 
     public override void OnEpisodeBegin()
     {
@@ -24,7 +23,7 @@ public class PushButtonAgent : Agent
         target.localPosition = new Vector3(Random.Range(-3.5f, -1.5f), Random.Range(-3.5f, 3.5f));
         button.localPosition = new Vector3(Random.Range(1.5f, 3.5f), Random.Range(-3.5f, 3.5f));
 
-        env.localRotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
+        //env.localRotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
         transform.rotation = Quaternion.identity;
         target.rotation = Quaternion.identity;
         button.rotation = Quaternion.identity;
@@ -38,6 +37,9 @@ public class PushButtonAgent : Agent
     {
         sensor.AddObservation((Vector2)(transform.position - env.position));
         sensor.AddObservation((Vector2)(isButtonPushed ? target.position - env.position : button.position - env.position));
+
+        // Add observation for the position of the enemy
+        sensor.AddObservation((Vector2)(enemy.position-env.position));
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -84,6 +86,13 @@ public class PushButtonAgent : Agent
             backgroundSpriteRenderer.color = Color.red;
             EndEpisode();
         }
+        else if (collision.TryGetComponent(out Enemy enemy))
+        {
+            AddReward(-7f);
+            backgroundSpriteRenderer.color = Color.red;
+            EndEpisode();
+        }
+        
     }
 
     private void OnTriggerStay2D(Collider2D collision)
