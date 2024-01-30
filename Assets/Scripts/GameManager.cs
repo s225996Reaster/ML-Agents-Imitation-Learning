@@ -651,10 +651,15 @@ public class GameManager : MonoBehaviour
                 tba.AgentVictory();
             }
             catch (Exception e) { Debug.Log(e); }
-            e_hpSlider[lastMark].SetActive(false);
-            e_touSlider[lastMark].SetActive(false);
-            e_clickBox.RemoveAt(lastMark);
-            e_marker.RemoveAt(lastMark);
+            try 
+            {
+                e_hpSlider[lastMark].SetActive(false);
+                e_touSlider[lastMark].SetActive(false);
+                e_clickBox.RemoveAt(lastMark);
+                e_marker.RemoveAt(lastMark);
+            }
+            catch(Exception e) { Debug.Log(e); }
+            
         }
         
         if (!esList[0].IsItGrounded())

@@ -1,0 +1,29 @@
+{
+    "BattleMouse": {
+        "checkpoints": [
+            {
+                "steps": 10583,
+                "file_path": "results\\ftest3\\BattleMouse\\BattleMouse-10583.onnx",
+                "reward": 1000.0,
+                "creation_time": 1706633736.717853,
+                "auxillary_file_paths": [
+                    "results\\ftest3\\BattleMouse\\BattleMouse-10583.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 10583,
+            "file_path": "results\\ftest3\\BattleMouse.onnx",
+            "reward": 1000.0,
+            "creation_time": 1706633736.717853,
+            "auxillary_file_paths": [
+                "results\\ftest3\\BattleMouse\\BattleMouse-10583.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.1.1+cpu"
+    }
+}
