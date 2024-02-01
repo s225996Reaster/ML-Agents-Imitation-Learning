@@ -6,16 +6,15 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
-    public int[] e_index=new int[4];
+    int[] e_index=new int[4];
     public List<GameObject> enemy = new List<GameObject>();
-    public List<GameObject> e_marker = new List<GameObject>();
+    List<GameObject> e_marker = new List<GameObject>();
     List<GameObject> e_hpSlider = new List<GameObject>();
     List<GameObject> e_touSlider = new List<GameObject>();
     List<float> e_hp = new List<float>();
     List<float> e_tou = new List<float>();
-    [SerializeField] List<GameObject> e_clickBox = new List<GameObject>();
+    List<GameObject> e_clickBox = new List<GameObject>();
     List<Status> esList = new List<Status>();
-    public GameObject tou;
 
     public List<GameObject> player = new List<GameObject>();
     List<GameObject> p_marker = new List<GameObject>();
@@ -23,14 +22,13 @@ public class GameManager : MonoBehaviour
     List<GameObject> p_touSlider = new List<GameObject>();
     List<float> p_hp = new List<float>();
     List<float> p_tou = new List<float>();
-    List<bool> breaked = new List<bool>();
     List<GameObject> p_clickBox = new List<GameObject>();
     List<Status> psmList = new List<Status>();
     public GameObject battlePosLeft, battlePosRight,pPos,ePos1, ePos2, ePos3, ePos4;
     public GameObject battlePosLeftUp, battlePosRightUp, pPosUp, ePos1Up, ePos2Up, ePos3Up, ePos4Up;
     List<GameObject> ePosBox = new List<GameObject>();
     List<GameObject> ePosBoxUp = new List<GameObject>();
-    public List<GameObject> pAttackCollider = new List<GameObject>();
+    List<GameObject> pAttackCollider = new List<GameObject>();
     List<GameObject> eAttackCollider = new List<GameObject>();
     List<GameObject> eMissCollider = new List<GameObject>();
     List<GameObject> eGetHitCollider = new List<GameObject>();
@@ -116,7 +114,6 @@ public class GameManager : MonoBehaviour
 
     public void GetEnemy()
     {
-        enemy = new List<GameObject>();
         e_marker = new List<GameObject>();
         e_clickBox = new List<GameObject>();
         e_hpSlider = new List<GameObject>();
@@ -126,10 +123,9 @@ public class GameManager : MonoBehaviour
         e_tou = new List<float>();
         int lc = 0;
         //marker.Clear();
-        if (GameObject.FindGameObjectWithTag("Enemy1"))
+        for(int i=0; i < enemy.Count;i++)
         {
-            e_index[0] = 0;
-            enemy.Add(GameObject.FindGameObjectWithTag("Enemy1"));
+            e_index[i] = i;
             e_marker.Add(enemy[lc].transform.Find("Marker").gameObject);
             e_clickBox.Add(enemy[lc].transform.Find("ClickBox").gameObject);
             e_hpSlider.Add(enemy[lc].transform.Find("Health").gameObject);
@@ -141,79 +137,29 @@ public class GameManager : MonoBehaviour
             eGetHitCollider.Add(enemy[lc].transform.Find("GetHitCollider").gameObject);
             eGetHitCollider[lc].SetActive(false);
             //e_hp.Add(PlayerPrefs.GetFloat("e1"));
-            e_clickBox[lc].GetComponent<UnityEngine.UI.Button>().onClick.AddListener(Enemy1GetClick);
+            switch (lc)
+            {
+                case 0:
+                    e_clickBox[lc].GetComponent<UnityEngine.UI.Button>().onClick.AddListener(Enemy1GetClick);
+                    break;
+                case 1:
+                    e_clickBox[lc].GetComponent<UnityEngine.UI.Button>().onClick.AddListener(Enemy2GetClick);
+                    break;
+                case 2:
+                    e_clickBox[lc].GetComponent<UnityEngine.UI.Button>().onClick.AddListener(Enemy3GetClick);
+                    break;
+                case 3:
+                    e_clickBox[lc].GetComponent<UnityEngine.UI.Button>().onClick.AddListener(Enemy4GetClick);
+                    break;
+            }
+            
             esList.Add(enemy[lc].GetComponent<Status>());
             e_hp.Add(esList[lc].GetHp());
             e_tou.Add(esList[lc].GetTou());
             //enemy[lc].GetComponent<Collider2D>().enabled = false;
             lc++;
         }
-
-        if (GameObject.FindGameObjectWithTag("Enemy2"))
-        {
-            e_index[1] = 1;
-            enemy.Add(GameObject.FindGameObjectWithTag("Enemy2"));
-            e_marker.Add(enemy[lc].transform.Find("Marker").gameObject);
-            e_clickBox.Add(enemy[lc].transform.Find("ClickBox").gameObject);
-            e_hpSlider.Add(enemy[lc].transform.Find("Health").gameObject);
-            e_touSlider.Add(enemy[lc].transform.Find("Toughness").gameObject);
-            eAttackCollider.Add(enemy[lc].transform.Find("AttackCollider").gameObject);
-            eAttackCollider[lc].SetActive(false);
-            eMissCollider.Add(enemy[lc].transform.Find("MissCollider").gameObject);
-            eMissCollider[lc].SetActive(false);
-            eGetHitCollider.Add(enemy[lc].transform.Find("GetHitCollider").gameObject);
-            eGetHitCollider[lc].SetActive(false);
-            e_clickBox[lc].GetComponent<UnityEngine.UI.Button>().onClick.AddListener(Enemy2GetClick);
-            esList.Add(enemy[lc].GetComponent<Status>());
-            e_hp.Add(esList[lc].GetHp());
-            e_tou.Add(esList[lc].GetTou());
-            //enemy[lc].GetComponent<Collider2D>().enabled = false;
-            lc++;
-        }
-
-        if (GameObject.FindGameObjectWithTag("Enemy3"))
-        {
-            e_index[2] = 2;
-            enemy.Add(GameObject.FindGameObjectWithTag("Enemy3"));
-            e_marker.Add(enemy[lc].transform.Find("Marker").gameObject);
-            e_clickBox.Add(enemy[lc].transform.Find("ClickBox").gameObject);
-            e_hpSlider.Add(enemy[lc].transform.Find("Health").gameObject);
-            e_touSlider.Add(enemy[lc].transform.Find("Toughness").gameObject);
-            eAttackCollider.Add(enemy[lc].transform.Find("AttackCollider").gameObject);
-            eAttackCollider[lc].SetActive(false);
-            eMissCollider.Add(enemy[lc].transform.Find("MissCollider").gameObject);
-            eMissCollider[lc].SetActive(false);
-            eGetHitCollider.Add(enemy[lc].transform.Find("GetHitCollider").gameObject);
-            eGetHitCollider[lc].SetActive(false);
-            e_clickBox[lc].GetComponent<UnityEngine.UI.Button>().onClick.AddListener(Enemy3GetClick);
-            esList.Add(enemy[lc].GetComponent<Status>());
-            e_hp.Add(esList[lc].GetHp());
-            e_tou.Add(esList[lc].GetTou());
-            //enemy[lc].GetComponent<Collider2D>().enabled = false;
-            lc++;
-        }
-
-        if (GameObject.FindGameObjectWithTag("Enemy4"))
-        {
-            e_index[3] = 3;
-            enemy.Add(GameObject.FindGameObjectWithTag("Enemy4"));
-            e_marker.Add(enemy[lc].transform.Find("Marker").gameObject);
-            e_clickBox.Add(enemy[lc].transform.Find("ClickBox").gameObject);
-            e_hpSlider.Add(enemy[lc].transform.Find("Health").gameObject);
-            e_touSlider.Add(enemy[lc].transform.Find("Toughness").gameObject);
-            eAttackCollider.Add(enemy[lc].transform.Find("AttackCollider").gameObject);
-            eAttackCollider[lc].SetActive(false);
-            eMissCollider.Add(enemy[lc].transform.Find("MissCollider").gameObject);
-            eMissCollider[lc].SetActive(false);
-            eGetHitCollider.Add(enemy[lc].transform.Find("GetHitCollider").gameObject);
-            eGetHitCollider[lc].SetActive(false);
-            e_clickBox[lc].GetComponent<UnityEngine.UI.Button>().onClick.AddListener(Enemy4GetClick);
-            esList.Add(enemy[lc].GetComponent<Status>());
-            e_hp.Add(esList[lc].GetHp());
-            e_tou.Add(esList[lc].GetTou());
-            //enemy[lc].GetComponent<Collider2D>().enabled = false;
-            lc++;
-        }
+        PositionUpdate();
     }
 
     int lastMark = 0;
