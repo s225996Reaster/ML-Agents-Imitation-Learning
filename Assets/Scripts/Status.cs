@@ -13,7 +13,8 @@ public class Status : MonoBehaviour
     //str, dex, int, con, app, pow, siz, edu, mov
     public int s_str, s_dex, s_int, s_con, s_app, s_pow, s_siz, s_edu, s_mov;
     [SerializeField]
-    int hp, tou, speed, timeToTurnStart;
+    float hp, tou;
+    int speed, timeToTurnStart;
     [SerializeField]
     string enemy_code;
     //bool myTurn = false;
@@ -52,7 +53,7 @@ public class Status : MonoBehaviour
         IsItBreaked(false);
         KnockUpClear();
         IsItDying(false);
-        IsItGrounded(false);
+        IsItGrounded(true);
     }
 
     public void CharaterAction()
@@ -243,7 +244,7 @@ public class Status : MonoBehaviour
         //Debug.Log("SetHp = " + hp);
     }
 
-    public int GetHp()
+    public float GetHp()
     {
         return hp;
     }
@@ -254,7 +255,7 @@ public class Status : MonoBehaviour
         tou = tou_value;
     }
 
-    public int GetTou()
+    public float GetTou()
     {
         
         return tou;

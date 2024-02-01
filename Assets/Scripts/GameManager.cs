@@ -261,7 +261,6 @@ public class GameManager : MonoBehaviour
             a.SetActive(true);
         foreach (GameObject a in e_marker)
             a.SetActive(false);
-        Debug.Log("Aim Tar no area");
     }
 
     public void AimTheTarget_False()
@@ -276,7 +275,6 @@ public class GameManager : MonoBehaviour
             a.SetActive(false);
         foreach (GameObject a in e_marker)
             a.SetActive(false);
-        Debug.Log("Aim False");
     }
 
     void AimTheTarget(int area)
@@ -306,7 +304,6 @@ public class GameManager : MonoBehaviour
             lastMark = 0;
             e_marker[0].SetActive(true);
         }
-        Debug.Log("Aim Target");
     }
 
     void AimTheTarget_Release(int area)
@@ -329,7 +326,6 @@ public class GameManager : MonoBehaviour
             lastMark = area - 1;
             e_marker[e_index[lastMark]].SetActive(true);
         }
-        Debug.Log("Aim Re");
     }
 
     void AimSelf()
@@ -340,7 +336,6 @@ public class GameManager : MonoBehaviour
         foreach (GameObject a in p_clickBox)
             a.SetActive(true);
         p_marker[0].SetActive(true);
-        Debug.Log("Aim Self");
     }
 
     public void Enemy1GetClick()
@@ -353,7 +348,6 @@ public class GameManager : MonoBehaviour
             foreach (GameObject a in e_marker)
                 a.SetActive(false);
             e_marker[lastMark].SetActive(true);
-            Debug.Log(lastMark+"???");
         }
     }
 
@@ -367,7 +361,6 @@ public class GameManager : MonoBehaviour
             foreach (GameObject a in e_marker)
                 a.SetActive(false);
             e_marker[lastMark].SetActive(true);
-            Debug.Log(lastMark + "???");
         }
     }
 
@@ -625,6 +618,8 @@ public class GameManager : MonoBehaviour
             dmg += esList[lastMark].GetHp() * 0.1f;
         }
 
+        Debug.Log("Player dmg: " + dmg);
+        Debug.Log("e_hp " + e_hp[lastMark]);
         if (e_tou[lastMark] > 0 && dmg >= 0)
             e_hp[lastMark] -= dmg * 0.7f;
         else if (dmg >= 0 && !esList[lastMark].IsItGrounded())
@@ -634,12 +629,12 @@ public class GameManager : MonoBehaviour
         p_tou[0] += psmList[0].GetTou() / (5 - focusStack);
         if (p_tou[0] > psmList[0].GetTou())
             p_tou[0] = psmList[0].GetTou();
-        
-        p_touSlider[0].GetComponent<Slider>().value = pConvertTou * p_tou[0];
+
         dmg = 0;
+        p_touSlider[0].GetComponent<Slider>().value = pConvertTou * p_tou[0];
         e_hpSlider[lastMark].GetComponent<Slider>().value = convert * e_hp[lastMark];
 
-        if (e_hpSlider[lastMark].GetComponent<Slider>().value <= 0)
+        if (e_hp[lastMark] <= 0)
         {
             amountOfEnemyDefeat++;
             esList[lastMark].IsItDying(true);
@@ -655,8 +650,8 @@ public class GameManager : MonoBehaviour
             {
                 e_hpSlider[lastMark].SetActive(false);
                 e_touSlider[lastMark].SetActive(false);
-                e_clickBox.RemoveAt(lastMark);
-                e_marker.RemoveAt(lastMark);
+                //e_clickBox.RemoveAt(lastMark);
+                //e_marker.RemoveAt(lastMark);
             }
             catch(Exception e) { Debug.Log(e); }
             
@@ -687,11 +682,10 @@ public class GameManager : MonoBehaviour
 
     void E_HitSuccess()
     {
-        Debug.Log("psm max Tou: " + psmList[0].GetTou());
         eAttackCollider[eTurnIndex].SetActive(false);
         float convert = 1 / psmList[0].GetHp();
         float convertTou = 1 / psmList[0].GetTou();
-        Debug.Log("hit dmg: " + dmg);
+        Debug.Log("Enemy dmg: " + dmg);
         if (dmg >= 0)
             if (p_tou[0] > 0)
             {
@@ -1006,6 +1000,7 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject ob in p_hpSlider)
         {
+            ob.SetActive(true);
             ob.GetComponent<Slider>().value=1;
         }
         for (int i = 0; i < p_tou.Count; i++)
@@ -1015,6 +1010,7 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject ob in p_touSlider)
         {
+            ob.SetActive(true);
             ob.GetComponent<Slider>().value = 1;
         }
         for(int i = 0; i < p_tou.Count; i++)
@@ -1024,6 +1020,7 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject ob in e_hpSlider)
         {
+            ob.SetActive(true);
             ob.GetComponent<Slider>().value = 1;
         }
         for (int i = 0; i < p_tou.Count; i++)
@@ -1033,6 +1030,7 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject ob in e_touSlider)
         {
+            ob.SetActive(true);
             ob.GetComponent<Slider>().value = 1;
         }
         for (int i = 0; i < p_tou.Count; i++)
