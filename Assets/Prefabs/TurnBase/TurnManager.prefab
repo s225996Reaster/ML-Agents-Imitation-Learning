@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 2062091583}
   m_Layer: 0
   m_Name: TurnManager
-  m_TagString: Untagged
+  m_TagString: TurnManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -309,14 +309,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   participant: []
   box:
-  - {fileID: 8609438422679635130}
-  - {fileID: 8609438422062357789}
-  - {fileID: 8609438422786344343}
-  - {fileID: 8609438422883089743}
-  - {fileID: 8609438420917495730}
-  - {fileID: 8609438422283077138}
-  - {fileID: 8609438420831675619}
-  - {fileID: 8609438421029046144}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  sortedBox: []
+  knockUpCount: 
 --- !u!1 &8609438422062357789
 GameObject:
   m_ObjectHideFlags: 0

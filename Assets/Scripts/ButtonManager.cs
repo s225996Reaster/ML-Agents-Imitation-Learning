@@ -7,10 +7,6 @@ public class ButtonManager : MonoBehaviour
 {
     public UnityEngine.UI.Button[] p_Button;
     public UnityEngine.UI.Button exit_Button;
-    void Start()
-    {
-        
-    }
 
     public void p_ButtonDisable()
     {
@@ -22,6 +18,15 @@ public class ButtonManager : MonoBehaviour
     {
         foreach (UnityEngine.UI.Button b in p_Button)
             b.interactable = true;
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
     }
 
     public void GameExit()

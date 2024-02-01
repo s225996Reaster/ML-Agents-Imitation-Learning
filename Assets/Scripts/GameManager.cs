@@ -66,7 +66,6 @@ public class GameManager : MonoBehaviour
         ePosBoxUp.Add(ePos4Up);
         if (GameObject.FindGameObjectWithTag("TurnManager"))
             tm = GameObject.FindGameObjectWithTag("TurnManager").GetComponent<TurnManager>();
-        GetEnemy();
 
         int pi = 0;
         if (GameObject.FindGameObjectWithTag("Player"))
@@ -103,6 +102,8 @@ public class GameManager : MonoBehaviour
         {
             ob.SetActive(false);
         }
+        GetEnemy();
+        PositionUpdate();
         //PullEnemy(3);
     }
 
@@ -159,7 +160,6 @@ public class GameManager : MonoBehaviour
             //enemy[lc].GetComponent<Collider2D>().enabled = false;
             lc++;
         }
-        PositionUpdate();
     }
 
     int lastMark = 0;
